@@ -7,37 +7,44 @@
 	<title>Weather Getter</title>
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Alegreya+Sans:900|PT+Sans">
 	<link rel="stylesheet prefetch" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
-	<link rel="stylesheet prefetch" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
 	<link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
-	<header>
-		<button class="btn btn-warning animated fadeIn" id="nightBtn">Try Night View</button>
-	</header>
-	<div class="title row">Weather&nbsp;&nbsp;Getter</div>
-	<div class="container main">
-		<div class="temperature row"></div>
-		<div class="condition row"></div>
-		<div class="location row"></div>
-		<div class="wind row">
-			<div class="col-xs-6" id="windText"></div>
-			<div class="col-xs-6" id="windPic">
-				<img src="http://plainicon.com/dboard/userprod/2808_75351/prod_thumb/plainicon.com-43648-256px.png" id="arrow" alt="Current Wind Direction">
+	<button class="btn btn-warning" id="nightBtn">Try Night View</button>
+	<div class="title row">Weather&nbsp;&nbsp;Getter
+	</div>
+	<div class="loading row">
+		<img src="https://rvrvrv.github.io/img/wxSpin.gif" alt="Loading"><br>
+		<h3>Loading weather data...</h3>
+	</div>
+	<div class="wx-container">
+		<div class="main">
+			<div class="temperature row">
+			</div>
+			<div class="condition row">
+			</div>
+			<div class="location row">
+			</div>
+			<div class="wind row">
+				<div class="col-xs-6 text-right" id="windText"></div>
+				<div class="col-xs-6 text-left" id="windPic">
+					<img src="https://rvrvrv.github.io/img/arrow.png" id="arrow" alt="Current Wind Direction">
+				</div>
+			</div>
+			<div class="bottomStats row">
+				<div class="col-xs-6 text-left" id="humidity">
+				</div>
+				<div class="col-xs-6 text-right" id="pressure">
+				</div>
 			</div>
 		</div>
-		<div class="bottomStats row">
-			<div class="col-xs-6" id="humidity"></div>
-			<div class="col-xs-6" id="pressure"></div>
+		<div class="convert row">
+			<button class="btn btn-info" id="convertBtn">Convert F to C</button>
 		</div>
-	<div class="convert row"><button class="btn btn-info" id="convertBtn">Convert F to C</button></div>
 	</div>
 	<footer></footer>
-	<div class="warningBox">
-		<span id="warning" class="animated flash">Note: The Open Weather API is incompatible<br>with the current connection.<br>In the address bar of your browser,<br>please replace "https" with "http".</span>
-	</div>
-	<div class="opaque"></div>
 </body>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="js/index.js"></script>
 </html>

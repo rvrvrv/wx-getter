@@ -1,112 +1,73 @@
 body {
-  background: #002;
-  color: #fff;
-  -webkit-transition: 1s;
-  transition: 1s;
-  font-family: 'PT Sans', sans-serif;
-  max-width: 100%;
-  overflow-x: hidden;
+	background: #002;
+	color: #fff;
+	-webkit-transition: 1s;
+	-webkit-transition: all 1s ease-in-out;
+	transition: all 1s ease-in-out;
+	font-family: 'PT Sans', sans-serif;
+	max-width: 100%;
+	overflow-x: hidden;
+	text-align: center;
 }
 
 .title {
-  margin-top: 5%;
-  font-family: 'Alegreya Sans', sans-serif;
-  font-size: calc(16px + 7vw);
-  text-align: center;
+	margin-top: 2%;
+	font-family: 'Alegreya Sans', sans-serif;
+	font-size: calc(16px + 7vw);
+}
+
+.wx-container {
+	display: none; /* Hidden during initial load */
 }
 
 .main {
-  background-image: url("http://i65.tinypic.com/34zhu2q.png");
-  color: #003;
-  margin: 30px auto;
-  width: 90%;
-  max-width: 500px;
-  border-radius: 5px;
-  text-align: center;
-  font-size: 2em;
-  box-shadow: 0px 0px 50px 30px rgba(156, 189, 255, 0.25);
+	background: #eee url('https://rvrvrv.github.io/img/paperLight.jpg');
+	color: #003;
+	margin: 30px auto;
+	padding: 3px;
+	width: 90%;
+	max-width: 500px;
+	border-radius: 5px;
+	font-size: 2em;
+	-webkit-box-shadow: 0 0 50px 30px rgba(156, 189, 255, 0.25);
+	box-shadow: 0 0 50px 30px rgba(156, 189, 255, 0.25);
 }
 
 .temperature {
-  font-weight: bold;
+	font-weight: bold;
 }
 
 .wind {
-  margin: 10px;
-}
-
-#windText {
-  text-align: right;
+	margin: 10px;
 }
 
 #windPic {
-  text-align: left;
-  font-size: .5em;
-  font-style: italic;
-  font-weight: bold;
+	font-size: .5em;
+	font-style: italic;
+	font-weight: bold;
 }
 
 #arrow {
-  height: 70px;
-  width: 70px;
-  -webkit-transition: 1.5s;
-  transition: 1.5s;
+	height: 70px;
+	width: 60px;
+	-webkit-transition: 2s;
+	transition: 2s;
 }
 
 .bottomStats {
-  font-size: .8em;
-}
-
-#humidity {
-  text-align: left;
-}
-
-#pressure {
-  text-align: right;
-}
-
-.convert {
-  text-align: center;
+	font-size: .8em;
 }
 
 #nightBtn {
-  position: fixed;
-  top: 0;
-  right: 0;
-  z-index: 998;
-  display: none;
+	position: fixed;
+	top: 0;
+	right: 0;
+	z-index: 998;
+	display: none;
 }
 
 footer {
-  position: absolute;
-  bottom: 0;
-  font-size: .8em;
-}
-
-.warningBox {
-  position: absolute;
-  z-index: 1000;
-  left: 0;
-  right: 0;
-  top: 20%;
-  text-align: center;
-  font-weight: bold;
-  color: #f00;
-  font-size: 2.2em;
-  -webkit-transition: .5s;
-  transition: .5s;
-  background-color: #000;
-  display: none;
-}
-
-.opaque {
-  position: fixed;
-  top: 0px;
-  left: 0px;
-  width: 100%;
-  height: 100%;
-  z-index: 999;
-  display: none;
-  background-color: #000;
-  opacity: 0.8;
+	position: absolute;
+	bottom: 0;
+	font-size: .8em;
 }

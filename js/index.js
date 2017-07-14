@@ -1,81 +1,99 @@
 /*jshint browser: true, esversion: 6*/
 /* global $*/
+let tempC, tempF, city, state;
+let tempUnit = 'F';
+
 $(document).ready(function() {
+	//Get location from FreeGeoIP
+	$.getJSON('https://freegeoip.net/json/')
+		.done(data => {
+			city = data.city;
+			state = data.region_code;
+			let apiURL = `https://cors-anywhere.herokuapp.com/http://api.openweathermap.org/data/2.5/weather?lat=${data.latitude}&lon=${data.longitude}&APPID=5409147afc24f8e2df831e426e107f34`;
+			$('footer').append(`API URL: ${apiURL}<br>`);
+			//Call get-weather function
+			getWx(apiURL);
+		})
+		.fail(() => displayError('location'));
 
-	var tempC, tempF, city, state;
-	var tempUnit = 'F';
+	//Temperature-conversion button
+	$('#convertBtn').click(() => convertTemp());
+	//Night-view button
+	$('#nightBtn').click(() => nightView());
+});
 
-	//Check for HTTP/HTTPS
-	if (window.location.href.match('https:')) {
-		$('.warningBox').show();
-		$('.opaque').show();
-	}
 
-	// Get location from ip-api
-	$.getJSON('http://ip-api.com/json', (data) => {
-		var lat = data.lat;
-		var lon = data.lon;
-		city = data.city;
-		state = data.regionName;
-		var apiURL = `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&APPID=5409147afc24f8e2df831e426e107f34`;
-		$('footer').append(`API URL: ${apiURL}<br>`);
-
-		//actual get-weather code
-		$.getJSON(apiURL, function (getWx) {
-			tempC = Math.round(getWx.main.temp - 273.15);
-			tempF = Math.round((tempC * (9 / 5)) + 32);
-			let cond = getWx.weather[0].main;
-			let condIcon = `http://openweathermap.org/img/w/${getWx.weather[0].icon}.png`;
-			let humidity = getWx.main.humidity;
-			let pressure = getWx.main.pressure;
-			let windSpeed = Math.round(getWx.wind.speed * 2.2369);
-			let windDir = getWx.wind.deg;
+//Get weather from OpenWeatherMap
+function getWx(apiURL) {
+	$.getJSON(apiURL)
+		.done(wx => {
+			tempC = Math.round(wx.main.temp - 273.15);
+			tempF = Math.round(tempC * (9 / 5) + 32);
+			let condIcon = `https://openweathermap.org/img/w/${wx.weather[0]
+          .icon}.png`;
+			let windSpeed = Math.round(wx.wind.speed * 2.2369);
+			let windDir = wx.wind.deg;
 
 			$('.temperature').html(`It's ${tempF}°F in ${city}, ${state}.`);
-			$('.condition').html(`Current Condition: ${cond}<img src=${condIcon} />`);
+			$('.condition').html(
+				`Current Condition: ${wx.weather[0].main}<img src=${condIcon} />`
+			);
 			$('#windText').html('Wind:');
 			$('#windPic').append(`<br>&nbsp;&nbsp;${windSpeed} mph`);
-			$('#humidity').html(`${humidity}% humidity`);
-			$('#pressure').html(`${pressure} hPA`);
+			$('#humidity').html(`${wx.main.humidity}% humidity`);
+			$('#pressure').html(`${wx.main.pressure} hPA`);
 
-			//Rotate arrow to point in correct wind direction
-			$('#arrow').css({
-				WebkitTransform: `rotate(${Math.abs(180 - windDir)}deg)`
-			});
-			$('#arrow').css({
-				'-moz-transform': `rotate(${Math.abs(180 - windDir)}deg)`
-			});
+			//Hide loading message and display weather
+			$('.loading').fadeOut(500, () => $('.wx-container').fadeIn(750));
 
-			//If nighttime, adjust colors
-			if (getWx.weather[0].icon.includes('n')) nightView();
-			//If daytime, show night button
-			else setTimeout(() => $('#nightBtn').show(), 3000);
-		});
-	});
+			//Rotate arrow to point at correct wind direction
+			setTimeout(() => {
+				$('#arrow').css({
+					WebkitTransform: `rotate(${Math.abs(180 - windDir)}deg)`
+				});
+				$('arrow').css({
+					'moz-transform': `rotate(${Math.abs(180 - windDir)}deg)`
+				});
+			}, 750);
 
-	//F<->C conversion
-	$('#convertBtn').click(function () {
-		if (tempUnit === 'F') {
-			$(this).text('Convert C to F');
-			$('.temperature').html(`It's ${tempC}°C in ${city}, ${state}.`);
-			tempUnit = 'C';
-			//SWAP F and C values
-		} else {
-			$(this).text('Convert F to C');
-			$('.temperature').html(`It's ${tempF}°F in ${city}, ${state}.`);
-			tempUnit = 'F';
-		}
-	});
+			//If nighttime, switch to night view
+			if (wx.weather[0].icon.includes('n')) nightView();
+			//If daytime, show night-view button
+			else setTimeout(() => $('#nightBtn').fadeIn(), 3000);
+		})
+		.fail(() => displayError());
+}
 
-	//When clicked, update to night colors
-	$('#nightBtn').click(() => nightView());
-
-	//Change GUI for night colors
-	function nightView() {
-		$('.main').css('background-image', 'url("http://i67.tinypic.com/2z9k70p.jpg")');
-		$('.main').css('color', '#DDDDFF');
-		$('#arrow').css('filter', 'invert(100%)');
-		$('#nightBtn').css('display', 'none');
+//Convert temperature between F & C
+function convertTemp() {
+	if (tempUnit === 'F') {
+		$('#convertBtn').text('Convert C to F');
+		$('.temperature').html(`It's ${tempC}°C in ${city}, ${state}.`);
+		tempUnit = 'C';
+		//SWAP F and C values
+	} else {
+		$('#convertBtn').text('Convert F to C');
+		$('.temperature').html(`It's ${tempF}°F in ${city}, ${state}.`);
+		tempUnit = 'F';
 	}
+}
 
-});
+//Change GUI for night colors
+function nightView() {
+	$('.main').css(
+		'background',
+		'#222 url("https://rvrvrv.github.io/img/paperDark.jpg")'
+	);
+	$('.main').css('color', '#ddf');
+	$('#arrow').css('filter', 'invert(100%)');
+	$('#nightBtn').css('display', 'none');
+}
+
+//Display error message
+function displayError(err) {
+	$('.loading').hide();
+	if (err === 'location')
+		$('.wx-container').after('Could not detect your location. Please try again on a different device.');
+	else
+		$('.wx-container').after('Could not load weather data. Please try again later.');
+}
