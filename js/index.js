@@ -3,7 +3,7 @@
 let tempC, tempF, city, state;
 let tempUnit = 'F';
 
-$(document).ready(function() {
+$(document).ready(function () {
 	//Get location from FreeGeoIP
 	$.getJSON('https://freegeoip.net/json/')
 		.done(data => {
@@ -22,7 +22,6 @@ $(document).ready(function() {
 	$('#nightBtn').click(() => nightView());
 });
 
-
 //Get weather from OpenWeatherMap
 function getWx(apiURL) {
 	$.getJSON(apiURL)
@@ -30,13 +29,13 @@ function getWx(apiURL) {
 			tempC = Math.round(wx.main.temp - 273.15);
 			tempF = Math.round(tempC * (9 / 5) + 32);
 			let condIcon = `https://openweathermap.org/img/w/${wx.weather[0]
-          .icon}.png`;
+        .icon}.png`;
 			let windSpeed = Math.round(wx.wind.speed * 2.2369);
 			let windDir = wx.wind.deg;
 
 			$('.temperature').html(`It's ${tempF}°F in ${city}, ${state}.`);
 			$('.condition').html(
-				`Current Condition: ${wx.weather[0].main}<img src=${condIcon} />`
+				`Current Condition: ${wx.weather[0].main}<img src=${condIcon} alt='Current condition'>`
 			);
 			$('#windText').html('Wind:');
 			$('#windPic').append(`<br>&nbsp;&nbsp;${windSpeed} mph`);
@@ -58,8 +57,9 @@ function getWx(apiURL) {
 
 			//If nighttime, switch to night view
 			if (wx.weather[0].icon.includes('n')) nightView();
-			//If daytime, show night-view button
-			else setTimeout(() => $('#nightBtn').fadeIn(), 3000);
+			else
+				//If daytime, show night-view button
+				setTimeout(() => $('#nightBtn').fadeIn(), 3000);
 		})
 		.fail(() => displayError());
 }
@@ -93,7 +93,11 @@ function nightView() {
 function displayError(err) {
 	$('.loading').hide();
 	if (err === 'location')
-		$('.wx-container').after('Could not detect your location. Please try again on a different device.');
+		$('.wx-container').after(
+			'Could not detect your location. Please try again on a different device.'
+		);
 	else
-		$('.wx-container').after('Could not load weather data. Please try again later.');
+		$('.wx-container').after(
+			'Could not load weather data. Please try again later.'
+		);
 }

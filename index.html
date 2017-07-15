@@ -11,7 +11,7 @@
 </head>
 
 <body>
-	<button class="btn btn-warning" id="nightBtn">Try Night View</button>
+	<button class="btn btn-warning hidden-xs" id="nightBtn">Try Night View</button>
 	<div class="title row">Weather&nbsp;&nbsp;Getter
 	</div>
 	<div class="loading row">
@@ -19,23 +19,25 @@
 		<h3>Loading weather data...</h3>
 	</div>
 	<div class="wx-container">
-		<div class="main">
-			<div class="temperature row">
-			</div>
-			<div class="condition row">
-			</div>
-			<div class="location row">
-			</div>
-			<div class="wind row">
-				<div class="col-xs-6 text-right" id="windText"></div>
-				<div class="col-xs-6 text-left" id="windPic">
-					<img src="https://rvrvrv.github.io/img/arrow.png" id="arrow" alt="Current Wind Direction">
+		<div class="row">
+			<div class="main col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-3">
+				<div class="temperature row">
 				</div>
-			</div>
-			<div class="bottomStats row">
-				<div class="col-xs-6 text-left" id="humidity">
+				<div class="condition row">
 				</div>
-				<div class="col-xs-6 text-right" id="pressure">
+				<div class="location row">
+				</div>
+				<div class="wind row">
+					<div class="col-xs-6 text-right" id="windText"></div>
+					<div class="col-xs-6 text-left" id="windPic">
+						<img src="https://rvrvrv.github.io/img/arrow.png" id="arrow" alt="Current wind direction">
+					</div>
+				</div>
+				<div class="bottomStats row">
+					<div class="col-xs-6 text-left" id="humidity">
+					</div>
+					<div class="col-xs-6 text-right" id="pressure">
+					</div>
 				</div>
 			</div>
 		</div>
@@ -43,7 +45,7 @@
 			<button class="btn btn-info" id="convertBtn">Convert F to C</button>
 		</div>
 	</div>
-	<footer></footer>
+	<footer class="hidden-xs text-left"></footer>
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="js/index.js"></script>

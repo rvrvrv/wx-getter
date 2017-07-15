@@ -1,34 +1,30 @@
 body {
 	background: #002;
 	color: #fff;
-	-webkit-transition: 1s;
+	font-family: 'PT Sans', sans-serif;
+	font-weight: 600;
+	text-align: center;
+	overflow-x: hidden;
 	-webkit-transition: all 1s ease-in-out;
 	transition: all 1s ease-in-out;
-	font-family: 'PT Sans', sans-serif;
-	max-width: 100%;
-	overflow-x: hidden;
-	text-align: center;
 }
 
 .title {
-	margin-top: 2%;
+	margin: 2% auto 3% auto;
 	font-family: 'Alegreya Sans', sans-serif;
 	font-size: calc(16px + 7vw);
 }
 
 .wx-container {
-	display: none; /* Hidden during initial load */
+	display: none;	/* Hidden during initial load */
 }
 
 .main {
 	background: #eee url('https://rvrvrv.github.io/img/paperLight.jpg');
 	color: #003;
-	margin: 30px auto;
 	padding: 3px;
-	width: 90%;
-	max-width: 500px;
 	border-radius: 5px;
-	font-size: 2em;
+	font-size: calc(16px + 1.4vw);
 	-webkit-box-shadow: 0 0 50px 30px rgba(156, 189, 255, 0.25);
 	box-shadow: 0 0 50px 30px rgba(156, 189, 255, 0.25);
 }
@@ -64,6 +60,10 @@ body {
 	right: 0;
 	z-index: 998;
 	display: none;
+}
+
+#convertBtn {
+	margin-top: 3%;
 }
 
 footer {
