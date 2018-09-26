@@ -1,73 +1,76 @@
 body {
-	background: #002;
-	color: #fff;
-	font-family: 'PT Sans', sans-serif;
-	font-weight: 600;
-	text-align: center;
-	overflow-x: hidden;
-	-webkit-transition: all 1s ease-in-out;
-	transition: all 1s ease-in-out;
+  background: #002;
+  color: #fff;
+  font: 600 1.5em "PT Sans", sans-serif;
+  text-align: center;
+  overflow-x: hidden;
 }
 
-.title {
-	margin: 2% auto 3% auto;
-	font-family: 'Alegreya Sans', sans-serif;
-	font-size: calc(16px + 7vw);
-}
-
-.wx-container {
-	display: none;	/* Hidden during initial load */
-}
-
-.main {
-	background: #eee url('https://rvrvrv.github.io/img/paperLight.jpg');
-	color: #003;
-	padding: 3px;
-	border-radius: 5px;
-	font-size: calc(16px + 1.4vw);
-	-webkit-box-shadow: 0 0 50px 30px rgba(156, 189, 255, 0.25);
-	box-shadow: 0 0 50px 30px rgba(156, 189, 255, 0.25);
-}
-
-.temperature {
-	font-weight: bold;
-}
-
-.wind {
-	margin: 10px;
-}
-
-#windPic {
-	font-size: .5em;
-	font-style: italic;
-	font-weight: bold;
-}
-
-#arrow {
-	height: 70px;
-	width: 60px;
-	-webkit-transition: 2s;
-	transition: 2s;
-}
-
-.bottomStats {
-	font-size: .8em;
-}
-
-#nightBtn {
-	position: fixed;
-	top: 0;
-	right: 0;
-	z-index: 998;
-	display: none;
-}
-
-#convertBtn {
-	margin-top: 3%;
+img {
+  transition: -webkit-filter 1s, -webkit-transform 1s;
+  transition: filter 1s, transform 1s;
+  transition: filter 1s, transform 1s, -webkit-filter 1s, -webkit-transform 1s;
 }
 
 footer {
-	position: absolute;
-	bottom: 0;
-	font-size: .8em;
+  position: absolute;
+  bottom: 0;
+}
+
+.title {
+  margin: 2% auto 3% auto;
+  font-family: "Alegreya Sans", sans-serif;
+  font-size: calc(16px + 6vw);
+}
+
+.wx-container {
+  display: none; /* Hidden during initial load */
+}
+
+.main {
+  background: #eee url("https://rvrvrv.github.io/img/paperLight.jpg");
+  border-radius: 5px;
+  box-shadow: 0 0 50px 30px rgba(156, 189, 255, 0.25);
+  color: #003;
+  font-size: calc(16px + 1.4vw);
+  padding: 3px;
+  transition: background 1s, color 1s;  
+}
+
+.temperature {
+  font-weight: bold;
+}
+
+.wind {
+  margin: 10px;
+}
+
+.text-wind {
+  line-height: 70px;
+}
+
+.wind img {
+  height: 70px;
+  width: 60px;
+  transition: 2s;
+}
+
+.bottom-stats {
+  font-size: 0.8em;
+}
+
+.btn {
+  transition: background-color .5s;
+}
+
+.btn-warning {
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 998;
+  display: none;
+}
+
+.btn-info {
+  margin-top: 3%;
 }
